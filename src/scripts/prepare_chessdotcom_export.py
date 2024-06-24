@@ -2,7 +2,7 @@ import pandas as pd
 import re
 
 #
-player = 'dtimer'
+player = 'mowbojones'
 # Load the CSV data
 data = pd.read_csv(f'../data/{player}/{player}_chess_games.csv')
 

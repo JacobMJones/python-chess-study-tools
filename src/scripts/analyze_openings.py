@@ -6,7 +6,7 @@ import os
 import concurrent.futures
 from datetime import datetime, timedelta
 
-player = 'dtimer'
+player = 'mowbojones'
 # Load the games from the Excel file
 df = pd.read_excel(f'../data/{player}/{player}_organized_games.xlsx')
 df = df.iloc[::-1]  # Reverse the DataFrame
@@ -45,7 +45,7 @@ def analyze_game(data):
         'opponents_best_move': [],
         'best_continuations': [],
     }
-    print('in ansss')
+
     try:
         for move in moves_pgn.split():
             eval_before_move = get_current_evaluation(board, engine)
@@ -124,10 +124,16 @@ if __name__ == "__main__":
     #Filter what you analyze
     
     #restrict analysis by ECO
-    df = df[df['eco'].str.startswith('D')]
+    # df = df[df['eco'].str.startswith('D')]
     
+    # Convert 'date' column to datetime
+    df['date'] = pd.to_datetime(df['date'], errors='coerce')
+
+    # Remove rows with NaT values in 'date' column
+    df = df.dropna(subset=['date'])
+
     # Filter the DataFrame to include only the last 6 months
-    df = df[df['date'] > datetime.now() - timedelta(days=6*30)]
+    df = df[df['date'] > datetime.now() - timedelta(days=1*30)]
     
     total_games = len(df)
 

@@ -9,7 +9,7 @@ def ensure_directory_exists(path):
 
 def download_chess_games(username):
     url = f"https://api.chess.com/pub/player/{username}/games/archives"
-    headers = {"User-Agent": "ADD EMAIL ADDRESS HERE"}
+    headers = {"User-Agent": "mrjacobtaiwan@gmail.com"}
     
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
